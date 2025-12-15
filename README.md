@@ -16,7 +16,8 @@ Cypress Cucumber Preprocessor
 JavaScript
 BDD (Gherkin – PT-BR)
 
--> Estrutura do Projeto
+-> Estrutura do Projeto:
+
 cypress/
  ├── e2e/
  │   └── features/
