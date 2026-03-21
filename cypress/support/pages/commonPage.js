@@ -1,13 +1,12 @@
 // selectors
 const commonSelectors = {
-    
+    conecteSe:'//section[@id="top_header"] //a[@href="/login" and contains(.,"Conecte-se")]',
 }
 
 
 class CommonPage {
 
-   clicarNoMenu(menu, index = 1) {
-    const xpath = `(//a[contains(normalize-space(.),'${menu}')])[${index}]`;
+  clicarEmConecte (){
     cy.xpath(xpath).click();
   }
 

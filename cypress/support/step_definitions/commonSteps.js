@@ -2,15 +2,10 @@ const { Given, When, Then } = require('@badeball/cypress-cucumber-preprocessor')
 const commonPage = require('../pages/commonPage');
 
 
-When("efetuou o login", () => {
+Given("que o usuário realizou o login", () => {
     cy.loginValido();
 })
-// === Comprar =====
 
-When('clico em {string}', (opcao) => {
-   commonPage.clicarNoMenu(opcao, 2);
-});
-
-Then('sou direcionado para a tela de produtos', () => {
-   cy.url().should('include', '/produtos');
-});
+Given("que o usuario acessa a tela de login",() =>{
+   cy.visit('login')
+})
