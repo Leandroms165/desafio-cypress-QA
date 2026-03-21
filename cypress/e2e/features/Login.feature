@@ -12,7 +12,7 @@ Dado que o usuario acessa a tela de login
 
 Cenário: Validar mensagem e-mail inválido
 Dado que o usuario acessa a tela de login
-    Quando preencher a senhaa
+    Quando preencher a senha
     E clica em conecte-se
     Então será exibida a mensagem: "E-mail inválido."
 
