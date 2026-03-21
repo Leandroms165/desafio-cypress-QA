@@ -11,7 +11,7 @@ module.exports = defineConfig({
 
     stepDefinitions: "cypress/support/step_definitions/**/*.js",
 
-    baseUrl: "http://lojaebac.ebaconline.art.br/",
+    baseUrl: "https://automationpratice.com.br/",
 
     async setupNodeEvents(on, config) {
       await preprocessor.addCucumberPreprocessorPlugin(on, config);
@@ -26,4 +26,9 @@ module.exports = defineConfig({
       return config;
     },
   },
+
+  env: {
+    userEmail: "_serviceadm@service.com",
+    senha: "123456"
+  }
 });
