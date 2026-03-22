@@ -11,6 +11,8 @@ module.exports = defineConfig({
 
     stepDefinitions: "cypress/support/step_definitions/**/*.js",
 
+    viewportWidth: 1353,
+    viewportHeight: 911,
     baseUrl: "https://automationpratice.com.br/",
 
     async setupNodeEvents(on, config) {
