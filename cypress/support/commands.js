@@ -1,13 +1,25 @@
-Cypress.Commands.add('loginValido', ()=> 
+Cypress.Commands.add('clickElement', (selector) => 
 {
-  cy.visit('/login')
-
-  cy.get('#user').type(Cypress.env('userEmail'))
-  cy.get('#password').type(Cypress.env('senha'))
-
-  cy.get('#btnLogin').click()
-
-  cy.contains('Login realizado').should('be.visible')
-
-  cy.get('.swal2-confirm').click()
+  cy.get(selector).should('be.visible').click()
 })
+
+Cypress.Commands.add('typeText', (selector, text) => 
+{
+  cy.get(selector).should('be.visible').clear().type(text)
+})
+
+Cypress.Commands.add('selectOption', (selector, value) => 
+{
+  cy.get(selector).should('be.visible').select(value)
+})
+
+Cypress.Commands.add('fillInput', (selector, value) => 
+{
+  cy.get(selector).should('be.visible').clear().type(value)
+})
+
+Cypress.Commands.add('selectDropdown', (selector, value) => 
+{
+  cy.get(selector).should('be.visible').select(value)
+})
+

@@ -3,7 +3,7 @@ const commonPage = require('../pages/commonPage');
 
 
 Given("que o usuário realizou o login", () => {
-    cy.loginValido();
+    commonPage.RealizarLogin();
 })
 
 Given("que o usuario acessa a tela de login",() =>{

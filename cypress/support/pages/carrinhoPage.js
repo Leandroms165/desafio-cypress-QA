@@ -3,6 +3,8 @@ const carrinhoPage = {
     iconeCarrinho: '//a[contains(@class,"offcanvas-toggle")]//i[contains(@class,"fa-shopping-bag")]',
     buttonSave: '//button[contains(text(),"Save")]',
     msgDadosObrigatorios: '#errorMessageFirstName',
+    fecharCarrinho: '#offcanvas-add-cart',
+    botaoCheckout: '#offcanvas-add-cart',
 }
 
 class CarrinhoPage 
@@ -39,8 +41,8 @@ class CarrinhoPage
 
     FecharCarrinho() 
     {
-      cy.get('#offcanvas-add-cart').find('button.offcanvas-close').click({ force: true })
-      cy.get('#offcanvas-add-cart').should('not.be.visible')
+      cy.get(carrinhoPage.fecharCarrinho).find('button.offcanvas-close').click({ force: true })
+      cy.get(carrinhoPage.fecharCarrinho).should('not.be.visible')
     }
     
     AdicionarItens(index) 
@@ -58,49 +60,33 @@ class CarrinhoPage
 
     ClicarBotaoCheckout()
     {
-        cy.get('#offcanvas-add-cart') .find('a[href="/checkout-one"]').should('be.visible').click()
+        cy.get(carrinhoPage.botaoCheckout).find('a[href="/checkout-one"]').should('be.visible').click()
     }
     
     cadastroDadosBillingsInformation( firstname, lastName, companyName, emailAddress, country, stateCity, zipCode,fullAddress ,additionalNotes)
     {
-        // First Name
-        cy.get('#fname').should('be.visible').clear().type(firstname)
-
-        // Last Name
-        cy.get('#lname').should('be.visible').clear().type(lastName)
-
-        // Company Name
-        cy.get('#cname').should('be.visible').clear().type(companyName)
-
-        // Email
-        cy.get('#email').should('be.visible').clear().type(emailAddress)
-
-        // Country (select)
-        cy.get('#country').should('be.visible').select(country)
-
-        // State / City (select)
-        cy.get('#city').should('be.visible').select(stateCity)
-
-        // Zip Code
-        cy.get('#zip').should('be.visible').clear().type(zipCode)
-
-        // Full Address
-        cy.get('#faddress').should('be.visible').clear().type(fullAddress)
-
-        // Additional Notes
-        cy.get('#messages').should('be.visible').clear().type(additionalNotes)
+        cy.fillInput('#fname', firstname)
+        cy.fillInput('#lname', lastName)
+        cy.fillInput('#cname', companyName)
+        cy.fillInput('#email', emailAddress)
+        cy.selectDropdown('#country', country)
+        cy.selectDropdown('#city', stateCity)
+        cy.fillInput('#zip', zipCode)
+        cy.fillInput('#faddress', fullAddress)
+        cy.fillInput('#messages', additionalNotes)
     }
 
     ClicarEmSave()
     {
-        cy.xpath(carrinhoPage.buttonSave).click();
+        cy.xpath(carrinhoPage.buttonSave).click()
     }
     
-    ValidarMensagemDadosObrigatorios(mensagemEsperada) {
-    cy.get('#errorMessageFirstName')
-      .should('be.visible')
-      .and('contain', mensagemEsperada)
-}
+    ValidarMensagemDadosObrigatorios(mensagemEsperada) 
+    {
+       
+       cy.get(carrinhoPage.msgDadosObrigatorios).should('be.visible').and('contain', mensagemEsperada)
+
+    }
 
     ValidaMensagemSucessBillingsInformation(mensagemEsperada)
     {
@@ -113,10 +99,7 @@ class CarrinhoPage
 
     validarMensagemSucessoPedido(mensagem) 
     {
-        cy.get('.offer_modal_left')
-      .should('be.visible')
-      .find('h3')
-      .should('contain', mensagem)
+        cy.get('.offer_modal_left').should('be.visible').find('h3').should('contain', mensagem)
     }
 }
 

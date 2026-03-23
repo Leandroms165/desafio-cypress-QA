@@ -23,5 +23,3 @@ Dado que o usuario acessa a tela de login
     Quando clica em conecte-se
     Então será exibida a mensagem: "Login realizado"
 
-Cenário: Login
-    Dado que o usuário realizou o login
