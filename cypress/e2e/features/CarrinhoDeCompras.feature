@@ -34,7 +34,7 @@ Cenário: Validar mensagem dados obrigatórios
     Quando clica em place order
     Então e exibida a mensagem: 'Preencha os dados de pagamento!'
 
-Cenário: Realizar pedido
+Cenário: Realizar pedido com sucesso
     Dado que o usuário realizou o login
     Quando acesso Qazando Shop
     E adiciono mais um item no carrinho
