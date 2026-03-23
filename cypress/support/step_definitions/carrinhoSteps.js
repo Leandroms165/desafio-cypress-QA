@@ -1,34 +1,41 @@
 const { When, Then, DataTable } = require("@badeball/cypress-cucumber-preprocessor");
 const carrinhoPage = require("../pages/carrinhoPage");
 
-When('acesso Qazando Shop', () => {
+When('acesso Qazando Shop', () => 
+{
     carrinhoPage.ClicarQazandoShop();
 })
 
-When('clico no ícone do carrinho de compras', () => {
+When('clico no ícone do carrinho de compras', () => 
+{
     carrinhoPage.ClicarIconeCarrinho();
 })
 
-When('remover os itens no carrinho', () => {
+When('remover os itens no carrinho', () => 
+{
     carrinhoPage.RemoverItensCarrinho();
     carrinhoPage.FecharCarrinho();
 })
 
-When('escolho dois itens para adicionar no carrinho',() => {
+When('escolho dois itens para adicionar no carrinho',() => 
+{
     carrinhoPage.AdicionarItens(0);
     carrinhoPage.ValidarMensagemItemAdicionado();
     
 })
 
-When('adiciono mais um item no carrinho', () => {
+When('adiciono mais um item no carrinho', () => 
+{
     carrinhoPage.AdicionarItens(2);
 })
 
-When('valido a mensagem de item adicionado com sucesso', () => {
+When('valido a mensagem de item adicionado com sucesso', () => 
+{
     carrinhoPage.ValidarMensagemItemAdicionado();
 })
 
-When('clico no botão de chekout', () => {
+When('clico no botão de chekout', () => 
+{
     carrinhoPage.ClicarBotaoCheckout();
 })
 
@@ -51,22 +58,27 @@ When('estou na tela chekout one preencho os dados:', (dataTable) => {
     )
 });
 
-When('clico em save', () => {
+When('clico em save', () => 
+{
     carrinhoPage.ClicarEmSave();
 });
 
-When('clica em place order', () => {
+When('clica em place order', () => 
+{
     carrinhoPage.ClicarPlaceOrder();
 })
 
-Then('será exibida a mensagem {string}', (mensagem) => {
+Then('será exibida a mensagem {string}', (mensagem) => 
+{
     carrinhoPage.ValidaMensagemSucessBillingsInformation(mensagem);
 })
 
-Then('e exibida a mensagem: {string}', (mensagem) => {
+Then('e exibida a mensagem: {string}', (mensagem) => 
+{
     carrinhoPage.ValidarMensagemDadosObrigatorios(mensagem);
 })
 
-Then('será exibida a mensagem de sucesso do pedido {string}', (mensagem) => {
+Then('será exibida a mensagem de sucesso do pedido {string}', (mensagem) => 
+{
     carrinhoPage.validarMensagemSucessoPedido(mensagem)
 })
