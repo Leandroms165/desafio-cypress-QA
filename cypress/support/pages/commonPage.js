@@ -4,10 +4,9 @@ const commonSelectors = {
 
 class CommonPage {
 
-  clicarEmConecte() {
-    cy.xpath(commonSelectors.conecteSe)
-      .should('be.visible')
-      .click();
+  clicarEmConecte() 
+  {
+    cy.xpath(commonSelectors.conecteSe).should('be.visible').click();
   }
 
   RealizarLogin() 
