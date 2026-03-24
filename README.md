@@ -1,154 +1,190 @@
-🛍️ Desafio Cypress + Cucumber QA: Automação E2E para E-commerce
-📝 Descrição do Projeto
-Este projeto consiste em uma suíte de testes automatizados End-to-End (E2E) para validar funcionalidades críticas de um e-commerce.
+# 🧪 Automação de Testes E2E com Cypress + Cucumber
 
-A automação foi desenvolvida utilizando o framework Cypress integrado com o Cucumber (padrão BDD/Gherkin), permitindo a escrita de testes legíveis por todo o time (técnicos e não-técnicos).
+## 📌 Visão Geral
+
+Este projeto implementa testes automatizados E2E utilizando **Cypress** com **Cucumber (BDD)**, organizados de forma modular e escalável.
+
+A estrutura foi definida para separar responsabilidades entre camadas, facilitando manutenção, leitura e reutilização de código.
 
 URL Base do E-commerce Testado:
+https://automationpratice.com.br/
+---
 
-https://lojaebac.ebaconline.art.br
+## 🧱 Arquitetura do Projeto
 
-🎯 Foco Estratégico
-O foco principal da automação foi o fluxo de compra completo. Esta escolha se deu por ser a funcionalidade de maior valor para o negócio, englobando:
+A automação está estruturada com base nos seguintes componentes:
 
-Autenticação (Login/Cadastro)
+* **Features (BDD)**
+* **Step Definitions**
+* **Pages (Page Object Model)**
+* **Common (reutilização)**
+* **Custom Commands**
 
-Navegação e Seleção de Produtos
+---
 
-Interação com o Carrinho
+## 📂 Estrutura de Pastas
 
-Checkout e Finalização de Pedido
+```
+cypress/
+│
+├── e2e/
+│   └── features/
+│       ├── Login.feature
+│       ├── CarrinhoDeCompras.feature
+│       └── ListaDeDesejos.feature
+│
+├── support/
+│   ├── pages/
+│   │   ├── loginPage.js
+│   │   ├── carrinhoPage.js
+│   │   ├── listaDesejosPage.js
+│   │   └── commonPage.js
+│   │
+│   ├── step_definitions/
+│   │   ├── loginSteps.js
+│   │   ├── carrinhoSteps.js
+│   │   ├── listaDesejosSteps.js
+│   │   └── commonSteps.js
+│   │
+│   ├── commands.js
+│   └── e2e.js
+│
+├── fixtures/
+└── cypress.config.js
+```
 
-⚙️ Tecnologias e Arquitetura
-💻 Tecnologias Utilizadas
-Cypress: Framework principal para execução dos testes E2E.
+---
 
-Cucumber: Utilizado via cypress-cucumber-preprocessor para suporte ao BDD (Gherkin).
+## 🧾 Features (BDD)
 
-Node.js / NPM: Ambiente de execução e gerenciamento de dependências.
+Os cenários são escritos em formato **Gherkin**, permitindo descrever comportamentos do sistema em linguagem natural.
 
-JavaScript: Linguagem de programação dos step definitions e Page Objects.
+Cada arquivo `.feature` representa uma funcionalidade do sistema, contendo:
 
-BDD (Gherkin – PT-BR): Linguagem de escrita dos cenários, promovendo a colaboração.
+* **Funcionalidade**
+* **Cenários**
+* **Passos (Dado, Quando, Então)**
 
-🏛️ Estrutura do Projeto (Page Object Pattern)
-O projeto segue o padrão de design Page Object Model (POM), o que garante:
+Exemplo de responsabilidades:
 
-Reaproveitamento de Código: Lógica de interação de página centralizada.
+* Descrever o fluxo de login
+* Validar regras de negócio
+* Representar ações do usuário
 
-Alta Manutenibilidade: Alterações na interface do usuário exigem modificações em apenas um local (o Page Object correspondente).
+---
 
-Organização Clara: Separação da lógica de teste (Steps) da lógica de interação com a UI (Pages).
+## 🔗 Step Definitions
 
-└── cypress/
-    ├── e2e/
-    │   └── features/ ➡️ Arquivos .feature (Gherkin)
-    │       ├── Comprar.feature
-    │       └── Register.feature
-    ├── support/
-    │   ├── pages/ ➡️ Page Objects (Ações da UI)
-    │   │   ├── commonPage.js
-    │   │   ├── comprarPage.js
-    │   │   └── minhaContaPage.js
-    │   └── step_definitions/ ➡️ Steps (Lógica do Cenário)
-    │       ├── commonSteps.js
-    │       ├── comprarSteps.js
-    │       └── registerSteps.js
-    ├── fixtures/ ➡️ Dados de teste estáticos
-    └── cypress.config.js
+Os arquivos de **steps** fazem a ligação entre os cenários escritos em Gherkin e a execução do código.
 
-    🛠️ Como Iniciar
-✅ Pré-requisitos
-Certifique-se de ter as seguintes ferramentas instaladas em seu ambiente:
+Responsabilidades:
 
-Node.js (versão 16 ou superior)
+* Interpretar os passos das features
+* Chamar métodos das páginas
+* Orquestrar o fluxo de execução
 
-NPM (Gerenciador de Pacotes) ou Yarn
+Cada domínio possui seu próprio arquivo:
 
-Git
+* `loginSteps.js`
+* `carrinhoSteps.js`
+* `listaDesejosSteps.js`
 
-📦 Instalação das Dependências
-1 - Clone o repositório:
+---
 
-git clone https://github.com/seu-usuario/desafio-cypress-QA.git
+## 📄 Pages (Page Object Model)
 
-2 - Acesse a pasta do projeto:
+A camada de **Pages** centraliza os elementos e ações da interface.
 
-cd desafio-cypress-QA
+Cada página contém:
 
-3 - Instale todas as dependências do projeto:
+* Seletores dos elementos
+* Métodos que representam ações do usuário
 
+Exemplo de responsabilidades:
+
+* Preencher campos
+* Clicar em botões
+* Interagir com elementos da UI
+
+Arquivos:
+
+* `loginPage.js`
+* `carrinhoPage.js`
+* `listaDesejosPage.js`
+
+---
+
+## ♻️ CommonPage
+
+O arquivo `commonPage.js` concentra ações reutilizáveis que não pertencem a uma única página.
+
+Responsabilidades:
+
+* Ações genéricas da aplicação
+* Interações comuns entre diferentes fluxos
+
+---
+
+## 🔁 CommonSteps
+
+O arquivo `commonSteps.js` contém steps reutilizáveis entre diferentes cenários.
+
+Responsabilidades:
+
+* Centralizar passos compartilhados
+* Evitar duplicação de código nos steps
+
+---
+
+## ⚙️ Custom Commands
+
+Os comandos customizados estão definidos em `commands.js` e estendem o Cypress com ações reutilizáveis.
+
+Exemplos de comandos:
+
+```js
+cy.clickElement(selector)
+cy.typeText(selector, text)
+cy.fillInput(selector, value)
+cy.selectDropdown(selector, value)
+```
+
+Responsabilidades:
+
+* Padronizar interações com elementos
+* Reduzir repetição de código
+* Melhorar legibilidade dos testes
+
+---
+
+## 🔄 Fluxo de Execução
+
+1. O cenário é definido em um arquivo `.feature`
+2. O step correspondente é identificado no arquivo de steps
+3. O step chama um método da Page
+4. A Page executa a ação utilizando Cypress
+5. Custom Commands são utilizados para padronizar interações
+
+---
+
+## 📦 Execução dos Testes
+
+### Instalar dependências
+
+```
 npm install
+```
 
-_________________________________________________________________________________________________
-▶️ Como Executar os Testes
+### Executar em modo interativo
 
-🖥️ Modo Interativo (Cypress Open)
-Para visualizar a execução dos testes em tempo real:
-
+```
 npx cypress open
+```
 
-Após a abertura da interface do Cypress, selecione o navegador e o arquivo .feature desejado para iniciar a execução.
+### Executar em modo headless
 
-💨 Modo Headless (Terminal)
-Para execução rápida e ideal para integração contínua (CI):
-
+```
 npx cypress run
+```
 
-🧪 Cenários Automatizados
-🛒 Funcionalidade: Comprar Produtos
-✔️ Cenário: Adicionar produtos ao carrinho
-
-Descrição:
-Valida o fluxo de navegação até a página de produtos, seleção de um item disponível em estoque e adição correta ao carrinho.
-
-Motivo da escolha:
-Este cenário é essencial em qualquer e-commerce e serve como base para diversos outros fluxos, como checkout, cálculo de frete e promoções.
-
-✔️ Cenário: Comprar produto
-
-Descrição:
-Valida o fluxo completo de compra, incluindo:
-
-Login
-
-Seleção de produto
-
-Carrinho
-
-Preenchimento dos dados de faturamento
-
-Escolha da forma de pagamento
-
-Finalização do pedido
-
-Motivo da escolha:
-É o cenário mais crítico do negócio, pois valida a principal funcionalidade do sistema: a conversão de compra.
-
-👤 Funcionalidade: Register (Cadastro/Login)
-✔️ Cenário: Registrar nova conta
-
-Descrição:
-Valida o cadastro de um novo usuário e o acesso bem-sucedido ao painel da conta.
-
-Motivo da escolha:
-O cadastro é a porta de entrada do usuário no sistema e impacta diretamente a experiência do cliente.
-
-✔️ Cenário: Realizar login com sucesso
-
-Descrição:
-Valida o login de um usuário já existente com credenciais válidas.
-
-Motivo da escolha:
-Fluxo reutilizável em praticamente todos os cenários autenticados do sistema.
-
-
-
-✨ Considerações Finais Legibilidade: 
-
-A escolha do BDD/Gherkin (PT-BR) torna os testes autoexplicativos, permitindo que stakeholders de negócio possam ler e entender a cobertura.Reaproveitamento: O uso estratégico do Page Object Model e de Cypress Custom Commands garante alta reutilização, minimizando o código duplicado.
-
-Escalabilidade: 
-
-A estrutura atual está pronta para fácil expansão, bastando adicionar novos arquivos .feature, .page.js e .steps.js para cobrir novas funcionalidades.
-
+---
