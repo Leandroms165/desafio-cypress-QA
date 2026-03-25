@@ -5,6 +5,9 @@ const carrinhoPage = {
     msgDadosObrigatorios: '#errorMessageFirstName',
     fecharCarrinho: '#offcanvas-add-cart',
     botaoCheckout: '#offcanvas-add-cart',
+    buttonFecharMenu: 'button.offcanvas-close',
+    iconAddCarrinho: '.product_item_two',
+    modalMensagemSucess: '#swal2-html-container',
 }
 
 class CarrinhoPage 
@@ -41,13 +44,13 @@ class CarrinhoPage
 
     FecharCarrinho() 
     {
-      cy.get(carrinhoPage.fecharCarrinho).find('button.offcanvas-close').click({ force: true })
+      cy.get(carrinhoPage.fecharCarrinho).find(carrinhoPage.buttonFecharMenu).click({ force: true })
       cy.get(carrinhoPage.fecharCarrinho).should('not.be.visible')
     }
     
     AdicionarItens(index) 
     {
-        cy.get('.product_item_two').eq(index).scrollIntoView().within(() => 
+        cy.get(carrinhoPage.iconAddCarrinho).eq(index).scrollIntoView().within(() => 
         {
             cy.get('i.fa-shopping-bag').click({ force: true })
         })
@@ -55,7 +58,7 @@ class CarrinhoPage
 
     ValidarMensagemItemAdicionado()
     {
-        cy.get('#swal2-html-container').should('be.visible').and('contain', 'Successfully added to your Cart')
+        cy.get(carrinhoPage.modalMensagemSucess).should('be.visible').and('contain', 'Successfully added to your Cart')
     }
 
     ClicarBotaoCheckout()

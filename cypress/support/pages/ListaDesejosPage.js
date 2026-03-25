@@ -1,7 +1,13 @@
 const  listaDesejosPage = {
   
      iconeListaDesejo: '//a[contains(@class,"offcanvas-toggle")]//i[contains(@class,"fa fa-heart")]',
-
+     adicionarListaDesejo: '.product_item_two',
+     iconFavoritar: 'i.fa-heart',
+     modalAddSucess: '#swal2-html-container',
+     buttonOkModal: 'button.swal2-confirm',
+     menulistaDeDesejos: '.offcanvas-wishlist-item-single',
+     idModalListaDesejos: '#offcanvas-wishlish',
+     buttonFecharModal: 'button.offcanvas-close'
 }
 
 class ListaDesejosPage 
@@ -13,7 +19,7 @@ class ListaDesejosPage
 
     FecharListaDesejos() 
     {
-        cy.get('#offcanvas-wishlish').find('button.offcanvas-close').dblclick()
+        cy.get(listaDesejosPage.idModalListaDesejos).find(listaDesejosPage.buttonFecharModal).dblclick()
     }
     clicarCategoriaCamera(categoria) 
     {
@@ -22,23 +28,23 @@ class ListaDesejosPage
 
 adicionarNaListaDesejos(index) 
 {
-  cy.get('.product_item_two').eq(index).scrollIntoView()
+  cy.get(listaDesejosPage.adicionarListaDesejo).eq(index).scrollIntoView()
     .within(() => 
     {
-      cy.get('i.fa-heart').click({ force: true })
+      cy.get(listaDesejosPage.iconFavoritar).click({ force: true })
     })
 }
 
 ValidaMensagemWishlist(mensagemEsperada) 
 {
-  cy.get('#swal2-html-container').should('be.visible').and('contain', mensagemEsperada)
+  cy.get(listaDesejosPage.modalAddSucess).should('be.visible').and('contain', mensagemEsperada)
 
-  cy.get('button.swal2-confirm').should('be.visible').click()
+  cy.get(listaDesejosPage.buttonOkModal).should('be.visible').click()
 }
 
 validarListNaoVazia() 
 {
-  cy.get('.offcanvas-wishlist-item-single').should('exist')
+  cy.get(listaDesejosPage.menulistaDeDesejos).should('exist')
 }
 }
 
